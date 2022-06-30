@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/resources.dart';
@@ -10,6 +11,15 @@ class MainScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+              FirebaseAuth.instance.signOut();
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
+          centerTitle: true,
+          title: const Text('Backup history'),
           backgroundColor: R.colors.primaryColor,
           foregroundColor: R.colors.secondaryColor,
         ),
