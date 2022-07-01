@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "388029697846",
+    "project_id": "backup-restore-application",
+    "storage_bucket": "backup-restore-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388029697846:android:61d3e7e1a7df70cdc4ed97",
+        "android_client_info": {
+          "package_name": "com.example.backup_restore_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388029697846-4avauvjmenjn9hlei9nsjc50hvjn73hl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.backup_restore_application",
+            "certificate_hash": "8d2a95501ee3a80e52d49d7310df504cd43b00d6"
+          }
+        },
+        {
+          "client_id": "388029697846-rq9eps0k9dku5q6h6jg3g0ciq69csetq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAMdqBrynYmt2JVHg_x9rp2e7l5_XVYno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388029697846-rq9eps0k9dku5q6h6jg3g0ciq69csetq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
