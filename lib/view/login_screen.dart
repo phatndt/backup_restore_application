@@ -1,11 +1,8 @@
-import 'package:backup_restore_application/view/main_screen.dart';
 import 'package:backup_restore_application/view_models/login_view_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 import '../constants/resources.dart';
 import '../constants/texts.dart';

@@ -1,3 +1,4 @@
+import 'package:backup_restore_application/view/setting_screen.dart';
 import 'package:backup_restore_application/view_models/main_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,19 +20,30 @@ class MainScreen extends ConsumerWidget {
               await FirebaseAuth.instance.signOut();
               await GoogleSignIn().signOut();
             },
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(Icons.logout),
           ),
+          actions: [
+            IconButton(
+              onPressed: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (builder) => const SettingScreen(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.settings),
+            ),
+          ],
           centerTitle: true,
           title: const Text('Backup history'),
           backgroundColor: R.colors.primaryColor,
           foregroundColor: R.colors.secondaryColor,
         ),
-        body: Column(
-          children: [],
-        ),
+        body: Column(),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            ref.watch(mainNotifierProvider.notifier).getContact(context);
+            ref.watch(mainNotifierProvider.notifier).backUpContact(context);
             // Get all contacts on device
             //List<Contact> contacts = await ContactsService.getContacts();
           },
