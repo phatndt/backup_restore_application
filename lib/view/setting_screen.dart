@@ -1,4 +1,5 @@
 import 'package:backup_restore_application/view_models/contact_view_model.dart';
+import 'package:backup_restore_application/view_models/phone_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -54,7 +55,14 @@ class SettingScreen extends ConsumerWidget {
                     return CustomAlerDiaLog(
                       title: T.backupCallLogs,
                       content: T.backupCallLogsContent,
-                      onPressed: () {},
+                      onPressed: () {
+                        ref
+                            .watch(phoneNotifierProvider.notifier)
+                            .backUpInformation(context)
+                            .then(
+                              (value) => Navigator.pop(context),
+                            );
+                      },
                       context: context,
                     );
                   },
