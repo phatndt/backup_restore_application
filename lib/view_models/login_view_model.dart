@@ -1,8 +1,6 @@
 import 'package:backup_restore_application/view/main_screen.dart';
 import 'package:backup_restore_application/view_models/repo.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginNotifier extends StateNotifier {
