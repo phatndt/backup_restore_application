@@ -33,6 +33,7 @@ dependencies:
   #support UI
   lottie: ^1.3.0
   flutter_speed_dial: ^6.0.0
+  flutter_slidable: ^1.3.0
 
   #state management
   riverpod: ^1.0.3
@@ -56,6 +57,9 @@ dependencies:
   path_provider: ^2.0.11
   call_log: ^3.2.3
   sms_advanced: ^1.0.1
+
+  #formart
+  intl: ^0.17.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

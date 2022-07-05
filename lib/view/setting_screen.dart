@@ -3,6 +3,7 @@ import 'package:backup_restore_application/view_models/phone_view_model.dart';
 import 'package:backup_restore_application/view_models/sms_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../constants/resources.dart';
 import '../constants/texts.dart';
@@ -43,7 +44,7 @@ class SettingScreen extends ConsumerWidget {
                   },
                 );
               },
-              leading: const Icon(Icons.contact_phone),
+              leading: const Icon(Icons.contact_page),
               title: const Text(T.backupContacts),
               tileColor: Colors.transparent,
             ),
@@ -101,7 +102,9 @@ class SettingScreen extends ConsumerWidget {
             ),
             const Divider(),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                openAppSettings();
+              },
               leading: const Icon(Icons.shield),
               title: const Text(T.requestPermission),
               tileColor: Colors.transparent,

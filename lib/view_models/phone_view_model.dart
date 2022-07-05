@@ -97,6 +97,12 @@ class PhoneLogNotifier extends StateNotifier implements BackupInterface {
       'phoneAccountId': callLogEntry.phoneAccountId,
     };
   }
+
+  @override
+  restoreInformation() {
+    // TODO: implement restoreInformation
+    throw UnimplementedError();
+  }
 }
 
 final phoneNotifierProvider =

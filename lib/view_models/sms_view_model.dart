@@ -78,6 +78,12 @@ class SmsLogNotifier extends StateNotifier implements BackupInterface {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
+
+  @override
+  restoreInformation() {
+    // TODO: implement restoreInformation
+    throw UnimplementedError();
+  }
 }
 
 final smsLogNotifierProvider =
