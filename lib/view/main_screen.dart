@@ -5,6 +5,7 @@ import 'package:backup_restore_application/view_models/contact_view_model.dart';
 import 'package:backup_restore_application/view_models/main_view_model.dart';
 import 'package:backup_restore_application/view_models/phone_view_model.dart';
 import 'package:backup_restore_application/view_models/repo.dart';
+import 'package:backup_restore_application/view_models/sms_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -165,7 +166,12 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                                                     .elementAt(index)
                                                     .fullPath,
                                                 context,
-                                              );
+                                              )
+                                              .then(
+                                            (value) {
+                                              Navigator.pop(context);
+                                            },
+                                          );
                                         },
                                         context: context,
                                       ),
@@ -191,7 +197,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                   ),
                   RefreshIndicator(
                     onRefresh: () async {
-                      ref.watch(smsLogFutureProvider);
+                      ref.refresh(smsLogFutureProvider);
                     },
                     child: ref.watch(smsLogFutureProvider).when(
                           data: (data) {
@@ -206,7 +212,22 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                                       builder: (builder) => CustomAlerDiaLog(
                                         title: T.restoreSmsLogs,
                                         content: T.restoreSmsLogsContent,
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          ref
+                                              .watch(smsLogNotifierProvider
+                                                  .notifier)
+                                              .restoreInformation(
+                                                data.items
+                                                    .elementAt(index)
+                                                    .fullPath,
+                                                context,
+                                              )
+                                              .then(
+                                            (value) {
+                                              Navigator.pop(context);
+                                            },
+                                          );
+                                        },
                                         context: context,
                                       ),
                                     );

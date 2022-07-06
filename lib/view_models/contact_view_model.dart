@@ -83,6 +83,7 @@ class ContactNotifier extends StateNotifier implements BackupInterface {
     }
   }
 
+  @override
   restoreInformation(String pathFile, BuildContext context) async {
     final islandRef = FirebaseStorage.instance.ref().child(pathFile);
     final appDocDir = await getApplicationDocumentsDirectory();

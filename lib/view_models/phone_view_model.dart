@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:backup_restore_application/view_models/backup_interface.dart';
+import 'package:backup_restore_application/view_models/main_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -99,6 +100,7 @@ class PhoneLogNotifier extends StateNotifier implements BackupInterface {
     };
   }
 
+  @override
   restoreInformation(String pathFile, BuildContext context) async {
     final islandRef = FirebaseStorage.instance.ref().child(pathFile);
     final appDocDir = await getApplicationDocumentsDirectory();
@@ -118,8 +120,7 @@ class PhoneLogNotifier extends StateNotifier implements BackupInterface {
           // List<CallLogEntry> callLogs = parse.map<CallLogEntry>((e) {
           //   CallLogEntry callLogEntry = convertCallLogFromMap(e);
           // }).toList();
-          const platform =
-              MethodChannel('com.backup_restore_application/phoneLogs');
+          const platform = MethodChannel('com.backup_restore_application/phoneLogs');
           try {
             final int result =
                 await platform.invokeMethod('insertPhoneLogs', parse);

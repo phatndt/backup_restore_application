@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:backup_restore_application/view_models/backup_interface.dart';
+import 'package:backup_restore_application/view_models/main_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod/riverpod.dart';
@@ -79,6 +81,42 @@ class SmsLogNotifier extends StateNotifier implements BackupInterface {
     }
   }
 
+  @override
+  restoreInformation(String pathFile, BuildContext context) async {
+    final islandRef = FirebaseStorage.instance.ref().child(pathFile);
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final path = appDocDir.path;
+    final filePath = "$path/sms.json";
+    final file = File(filePath);
+    final downloadTask = islandRef.writeToFile(file);
+    downloadTask.snapshotEvents.listen((taskSnapshot) async {
+      switch (taskSnapshot.state) {
+        case TaskState.running:
+          break;
+        case TaskState.paused:
+          break;
+        case TaskState.success:
+          final parse = await file.readAsString();
+          log(parse);
+          // List<CallLogEntry> callLogs = parse.map<CallLogEntry>((e) {
+          //   CallLogEntry callLogEntry = convertCallLogFromMap(e);
+          // }).toList();
+          const platform =
+              MethodChannel('com.backup_restore_application/phoneLogs');
+          try {
+            final int result =
+                await platform.invokeMethod('insertSmsLogs', parse);
+          } on PlatformException catch (e) {
+            log(e.toString());
+          }
+          break;
+        case TaskState.canceled:
+          break;
+        case TaskState.error:
+          break;
+      }
+    });
+  }
 }
 
 final smsLogNotifierProvider =

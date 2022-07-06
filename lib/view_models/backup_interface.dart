@@ -10,4 +10,5 @@ abstract class BackupInterface {
   pushInformationToFirestore(File file);
   getPermission();
   showPermission(PermissionStatus permissionStatus, BuildContext context);
+  restoreInformation(String pathFile, BuildContext context);
 }
