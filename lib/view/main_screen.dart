@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:backup_restore_application/view/login_screen.dart';
 import 'package:backup_restore_application/view/setting_screen.dart';
 import 'package:backup_restore_application/view_models/contact_view_model.dart';
 import 'package:backup_restore_application/view_models/main_view_model.dart';
@@ -43,7 +44,10 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
           appBar: AppBar(
             leading: IconButton(
               onPressed: () async {
-                Navigator.pop(context);
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => const LoginScreen()));
                 await FirebaseAuth.instance.signOut();
                 await GoogleSignIn().signOut();
               },
@@ -253,12 +257,6 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                 ],
               );
             },
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () async {},
-            foregroundColor: R.colors.secondaryColor,
-            backgroundColor: R.colors.primaryColor,
-            child: const Icon(Icons.integration_instructions),
           ),
         ),
       ),

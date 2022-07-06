@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
    <application
-        android:label="backup_restore_application"
+        android:label="BR"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,4 +1,6 @@
 import 'package:backup_restore_application/view/login_screen.dart';
+import 'package:backup_restore_application/view/main_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
               primary: R.colors.primaryColor,
             ),
           ),
-          home: const LoginScreen(),
+          home: FirebaseAuth.instance.currentUser != null ? const MainScreen() : const LoginScreen(),
         );
       },
     );
