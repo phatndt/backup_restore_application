@@ -25,6 +25,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'kotlinx-serialization'
 
 android {
     compileSdkVersion localProperties.getProperty('flutter.compileSdkVersion').toInteger()
@@ -70,4 +71,5 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:30.2.0')
     implementation 'com.google.firebase:firebase-analytics' 
     implementation 'androidx.multidex:multidex:2.0.1'
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 }

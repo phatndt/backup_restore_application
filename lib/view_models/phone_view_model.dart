@@ -6,6 +6,7 @@ import 'package:backup_restore_application/view_models/backup_interface.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:call_log/call_log.dart';
 import 'package:path_provider/path_provider.dart';
@@ -98,10 +99,55 @@ class PhoneLogNotifier extends StateNotifier implements BackupInterface {
     };
   }
 
-  @override
-  restoreInformation() {
-    // TODO: implement restoreInformation
-    throw UnimplementedError();
+  restoreInformation(String pathFile, BuildContext context) async {
+    final islandRef = FirebaseStorage.instance.ref().child(pathFile);
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final path = appDocDir.path;
+    final filePath = "$path/backup.json";
+    final file = File(filePath);
+    final downloadTask = islandRef.writeToFile(file);
+    downloadTask.snapshotEvents.listen((taskSnapshot) async {
+      switch (taskSnapshot.state) {
+        case TaskState.running:
+          break;
+        case TaskState.paused:
+          break;
+        case TaskState.success:
+          final parse = await file.readAsString();
+          log(parse);
+          // List<CallLogEntry> callLogs = parse.map<CallLogEntry>((e) {
+          //   CallLogEntry callLogEntry = convertCallLogFromMap(e);
+          // }).toList();
+          const platform =
+              MethodChannel('com.backup_restore_application/phoneLogs');
+          try {
+            final int result =
+                await platform.invokeMethod('insertPhoneLogs', parse);
+          } on PlatformException catch (e) {
+            log(e.toString());
+          }
+          break;
+        case TaskState.canceled:
+          break;
+        case TaskState.error:
+          break;
+      }
+    });
+  }
+
+  CallLogEntry convertCallLogFromMap(Map<String, dynamic> m) {
+    return CallLogEntry(
+      name: m['name'],
+      number: m['number'],
+      formattedNumber: m['formattedNumber'],
+      callType: getCallType(m['callType']),
+      duration: m['duration'],
+      timestamp: m['timestamp'],
+      cachedNumberType: m['cachedNumberType'],
+      cachedNumberLabel: m['cachedNumberLabel'],
+      simDisplayName: m['simDisplayName'],
+      phoneAccountId: m['phoneAccountId'],
+    );
   }
 }
 

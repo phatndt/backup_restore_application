@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:backup_restore_application/view/setting_screen.dart';
 import 'package:backup_restore_application/view_models/contact_view_model.dart';
 import 'package:backup_restore_application/view_models/main_view_model.dart';
+import 'package:backup_restore_application/view_models/phone_view_model.dart';
 import 'package:backup_restore_application/view_models/repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -155,7 +156,17 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                                       builder: (builder) => CustomAlerDiaLog(
                                         title: T.restoreCallLogs,
                                         content: T.restoreCallLogsContent,
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          ref
+                                              .watch(phoneNotifierProvider
+                                                  .notifier)
+                                              .restoreInformation(
+                                                data.items
+                                                    .elementAt(index)
+                                                    .fullPath,
+                                                context,
+                                              );
+                                        },
                                         context: context,
                                       ),
                                     );

@@ -79,11 +79,6 @@ class SmsLogNotifier extends StateNotifier implements BackupInterface {
     }
   }
 
-  @override
-  restoreInformation() {
-    // TODO: implement restoreInformation
-    throw UnimplementedError();
-  }
 }
 
 final smsLogNotifierProvider =
